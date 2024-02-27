@@ -1,5 +1,5 @@
 {
-  "name": "mpa-vite-template",
+  "name": "mpa-web-template",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,8 +10,8 @@
     "test": "jest --config=./jest.config.js --coverage=true --passWithNoTests",
     "test:watch": "jest --config=./jest.config.js --coverage=true --passWithNoTests --watchAll",
     "clean": "npx rimraf dist",
-    "lint:js": "eslint './pages/**/*.js'",
-    "lint:css": "stylelint './pages/**/*.css' -c=./stylelint.config.js --allow-empty-input",
+    "lint:js": "eslint 'pages/**/*.js'",
+    "lint:css": "stylelint 'pages/**/*.css' -c=./stylelint.config.js --allow-empty-input",
     "lint": "npm run lint:js && npm run lint:css"
   },
   "dependencies": {
