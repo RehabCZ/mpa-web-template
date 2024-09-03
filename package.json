@@ -10,8 +10,8 @@
     "test": "jest --config=./jest.config.js --coverage=true --passWithNoTests",
     "test:watch": "jest --config=./jest.config.js --coverage=true --passWithNoTests --watchAll",
     "clean": "npx rimraf dist",
-    "lint:js": "eslint 'pages/**/*.js'",
-    "lint:css": "stylelint 'pages/**/*.css' -c=.stylelintrc --quiet-deprecation-warnings",
+    "lint:js": "eslint 'pages/**/*.{js,ts}' --fix",
+    "lint:css": "stylelint 'pages/**/*.css' -c=stylelint.config.js --quiet-deprecation-warnings",
     "lint": "npm run lint:js && npm run lint:css"
   },
   "dependencies": {

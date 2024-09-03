@@ -1,1 +1,1 @@
-console.log("Test index");
+console.log('Test index');
