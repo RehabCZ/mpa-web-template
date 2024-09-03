@@ -2,6 +2,8 @@ export default {
     plugins: {
         tailwindcss: {},
         autoprefixer: {},
-        stylelint: {},
+        stylelint: {
+            quietDeprecationWarnings: true,
+        },
     },
-}
+};
