@@ -51,6 +51,7 @@
     "node": ">=18.12.0"
   },
   "pre-push": [
+    "test",
     "lint:js",
     "lint:css"
   ]
