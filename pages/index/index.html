@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -7,14 +7,25 @@
         <title>Index document</title>
 
         <!-- Don't forget to add Tailwind attributes -->
-        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="/pages/index/style.css" />
 
         <!-- Has to be marked as module -->
-        <script src="./script.ts" type="module"></script>
+        <script src="/pages/index/script.ts" type="module"></script>
     </head>
 
     <body>
-        This is index file
-        <a href="/example">Example page</a>
+        <div class="main">
+            <a href="https://vitejs.dev" target="_blank">
+                <img src="/assets/vite-logo.svg" class="logo" alt="Vite logo" />
+            </a>
+            <h1>Vite + Multipage</h1>
+            <div class="p-[2em]">
+                <a href="/example"> Go to example page! </a>
+            </div>
+
+            <p><b>Tailwind</b> and <b>Typescript</b> out for the box</p>
+            <p>Ready HMR configuration</p>
+            <p class="font-light">Click on the Vite logo to learn more</p>
+        </div>
     </body>
 </html>
