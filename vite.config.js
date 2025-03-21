@@ -1,11 +1,20 @@
 import { defineConfig } from 'vite';
 import { mpa } from './vite.plugin.js';
+import handlebars from 'vite-plugin-handlebars';
 import FullReload from 'vite-plugin-full-reload';
 import babel from 'vite-plugin-babel';
 
 /** @type {import('vite').UserConfig} */
 export default defineConfig({
-    plugins: [mpa(), FullReload(['src/**/*']), babel()],
+    plugins: [
+        mpa(),
+        FullReload(['src/**/*']),
+        babel(),
+        handlebars({
+            compileOptions: { preventIndent: true },
+            partialDirectory: 'src/components',
+        }),
+    ],
     publicDir: 'assets',
     base: '/',
     build: {

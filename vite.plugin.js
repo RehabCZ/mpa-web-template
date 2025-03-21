@@ -1,4 +1,4 @@
-import { basename, dirname, extname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { globSync } from 'node:fs';
 
 /**
@@ -44,13 +44,29 @@ export const mpa = (
         configureServer(viteDevServer) {
             return () => {
                 const routes = {};
+                let route;
                 pages.forEach((page) => {
-                    let route = '/' + basename(dirname(page));
+                    /*
+                     *   Routes are generated in this pattern:
+                     *
+                     *   src/pages/example/index.html -> /example
+                     *   src/pages/example.html -> /example
+                     *
+                     *   Index file has to be in index folder!
+                     */
+                    if (basename(page).split('.').slice(0, -1).join('.') == config.indexName)
+                        route = '/' + basename(dirname(page));
+                    else route = '/' + basename(page).split('.').slice(0, -1).join('.');
                     if (route == `/${config.indexName}`) route = '/';
-                    routes[route] = page.replace(/\\/g, '/');
+                    routes[route] ??= page.replace(/\\/g, '/');
                 });
                 viteDevServer.middlewares.use(async (req, res, next) => {
-                    req.url = `/${routes[req.originalUrl]}`;
+                    /*
+                     *  If you name your file ex. 404.html
+                     *  all not found request will be redirected to this file
+                     */
+                    const route = routes[req.originalUrl] ?? routes['/404'];
+                    req.url = `/${route}`;
                     next();
                 });
             };

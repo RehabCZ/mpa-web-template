@@ -32,5 +32,5 @@ export default [
             'no-debugger': 'warn',
         },
     },
-    { ignores: ['*.config.{js,ts,mjs}', 'node_modules', 'dist'] },
+    { ignores: ['*.config.{js,ts,mjs}', 'vite.plugin.js', 'node_modules', 'dist'] },
 ];
