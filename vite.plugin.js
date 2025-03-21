@@ -1,5 +1,5 @@
-import { dirname, resolve } from 'path';
-import { globSync } from 'glob';
+import { basename, dirname, extname, resolve } from 'node:path';
+import { globSync } from 'node:fs';
 
 /**
  * Custom plugin for MPA dev server router
@@ -9,12 +9,11 @@ import { globSync } from 'glob';
  */
 export const mpa = (
     config = {
-        pagesDir: 'pages',
-        pageExt: '.html',
+        pagePattern: './src/pages/**/*.html',
         indexName: 'index',
     },
 ) => {
-    const pages = globSync(`${config.pagesDir}/**/*${config.pageExt}`);
+    const pages = globSync(config.pagePattern);
     return {
         name: 'mpa',
         config(config) {
@@ -46,9 +45,9 @@ export const mpa = (
             return () => {
                 const routes = {};
                 pages.forEach((page) => {
-                    let route = dirname(page).replace(config.pagesDir, '');
+                    let route = '/' + basename(dirname(page));
                     if (route == `/${config.indexName}`) route = '/';
-                    routes[route] = page;
+                    routes[route] = page.replace(/\\/g, '/');
                 });
                 viteDevServer.middlewares.use(async (req, res, next) => {
                     req.url = `/${routes[req.originalUrl]}`;

@@ -1,12 +1,13 @@
 import { defineConfig } from 'vite';
-import babel from 'vite-plugin-babel';
+import { mpa } from './vite.plugin.js';
 import FullReload from 'vite-plugin-full-reload';
-import { mpa } from './vite.plugin';
+import babel from 'vite-plugin-babel';
 
 /** @type {import('vite').UserConfig} */
 export default defineConfig({
-    plugins: [FullReload(['./pages/**/*', 'src/**/*']), mpa(), babel()],
+    plugins: [mpa(), FullReload(['src/**/*']), babel()],
     publicDir: 'assets',
+    base: '/',
     build: {
         modulePreload: {
             polyfill: false,
@@ -15,6 +16,9 @@ export default defineConfig({
         outDir: 'dist',
     },
     server: {
+        host: '0.0.0.0',
+        open: true,
+        port: 5173,
         watch: {
             usePolling: true,
         },
